@@ -1,4 +1,4 @@
-# 기본적인 서비스 실행을 위한 Docker Compose 파일입니다.
+# 필수 서비스를 로컬에서 실행하기 위한 Docker Compose 파일입니다.
 # 이 파일을 사용하여 Zookeeper, Kafka, Kafka UI, Redis, Elasticsearch, Kibana를 실행할 수 있습니다.
 version: '3.8'
 services:
@@ -66,7 +66,7 @@ services:
       - kafka2
       - kafka3
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:19092,kafka2:19093,kafka3:19094
@@ -85,14 +85,14 @@ services:
       - xpack.security.transport.ssl.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
-      - 9200:9200
+      - "9200:9200"
     volumes:
       - esdata:/usr/share/elasticsearch/data
   kibana:
     image: docker.elastic.co/kibana/kibana:8.12.2
     container_name: kibana
     ports:
-      - 5601:5601
+      - "5601:5601"
     depends_on:
       - elasticsearch
     environment:
